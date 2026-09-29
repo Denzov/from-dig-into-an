@@ -24,8 +24,8 @@ class MCP4725:
         second_byte = number & 0xFF
         self.bus.write_byte_data(0x61, first_byte, second_byte)
 
-        if self.verbose:
-            print(f"Число: {number}, отправленные по I2C данные: [0x{(self.address << 1):02X}, 0x{first_byte:02X}, 0x{second_byte:02X}]\n")
+        # if self.verbose:
+            # print(f"Число: {number}, отправленные по I2C данные: [0x{(self.address << 1):02X}, 0x{first_byte:02X}, 0x{second_byte:02X}]\n")
     def set_voltage(self, voltage):
         number = int(voltage / self.dynamic_range * 4095)
         self.set_number(number)

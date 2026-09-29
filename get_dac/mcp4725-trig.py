@@ -1,4 +1,4 @@
-import r2r_dac as r2r
+import mcp4725_driver as mcp
 import signal_generator as sg
 import time
 import numpy
@@ -10,7 +10,7 @@ sampling_frequency = 1000
 
 if __name__ == "__main__":
     try:
-        dac = r2r.R2R_DAC([22, 27, 17, 26, 25, 21, 20, 16], 3.155, True)
+        dac = mcp.MCP4725(5)
         
         while True:
             try:

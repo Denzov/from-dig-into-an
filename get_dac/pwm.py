@@ -1,6 +1,9 @@
 
 import RPi.GPIO as GPIO
 
+import signal_generator as sg
+import time
+
 class PWM_DAC:
     def __init__(self, gpio_pin, pwm_frequency, dynamic_range, verbose = False):
         self.gpio_pin = gpio_pin
@@ -19,9 +22,13 @@ class PWM_DAC:
 
     def set_voltage(self, voltage):
         duty = voltage / self.dynamic_range * 100
-        print(duty)
+        # print(duty)
         self.pwm.ChangeDutyCycle(duty)
 
+
+amplitude = 1
+signal_frequency = 1
+sampling_frequency = 10000
 
 if __name__ == "__main__":
     dac = PWM_DAC(12, 500, 3.3, True)
@@ -29,8 +36,7 @@ if __name__ == "__main__":
     try:
         while True:
             try:
-                voltage = float(input("Введите напряжение в Вольтах: "))
-                dac.set_voltage(voltage)
+                dac.set_voltage(sg.line_amp(signal_frequency, time.time())*amplitude*2)
 
             except ValueError:
                 print("Вы ввели не число. Попробуйте ещё раз\n")
